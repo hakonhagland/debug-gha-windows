@@ -62,3 +62,4 @@ jobs:
           $env:PERL_ALIEN_MSYS_BIN = "C:\msys64\usr\bin"
           perl Makefile.PL
           gmake
+          echo "XYZ"
