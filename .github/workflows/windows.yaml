@@ -37,6 +37,6 @@ jobs:
         run: |
           Write-Output $PWD
           Get-ChildItem Alien-MSYS
-#          cd Alien-MSYS\Alien-MSYS-0.017
-#          perl Makefile.PL
-#          gmake
+          cd Alien-MSYS\Alien-MSYS-0.17
+          perl Makefile.PL
+          gmake
