@@ -35,8 +35,8 @@ jobs:
           dzil build
       - name: Install Alien::MSYS
         run: |
-          echo $PWD
-          ls Alien-MSYS
+          Write-Output $PWD
+          Get-ChildItem Alien-MSYS
           cd Alien-MSYS/Alien-MSYS-0.017
           perl Makefile.PL
-          make
+          gmake
