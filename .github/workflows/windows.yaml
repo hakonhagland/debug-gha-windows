@@ -55,6 +55,7 @@ jobs:
       - name: Add MSYS2 to Path
         run: |
           echo "C:\msys64\usr\bin" >> $env:GITHUB_PATH
+          ls C:\msys64\usr\bin
       - name: Install Alien::MSYS
         run: |
           $env:PATH = "$env:STRAWBERRY_PERL_PATH;$env:PATH"
