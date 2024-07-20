@@ -33,4 +33,14 @@ jobs:
         run: |
           wget https://ftp.gnu.org/gnu/gsl/gsl-2.8.tar.gz
           tar -xzf gsl-2.8.tar.gz
-          ls .
+      - name: Build gsl
+        run: |
+          cd gsl-2.8
+          ./configure --prefix=/c/msys64/opt/gsl --enable-shared --disable-static --with-pic
+          make
+          make install
+      - name: Verify gsl
+        run: |
+           ls /c/msys64/opt/gsl/lib
+           ls /c/msys64/opt/gsl/include
+           ls /c/msys64/opt/gsl/bin
