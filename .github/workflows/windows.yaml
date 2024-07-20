@@ -33,7 +33,7 @@ jobs:
           dzil authordeps --missing | cpanm --notest
           dzil listdeps --missing | cpanm --notest
           dzil build
-      - name: Add Strawberry Perl to PATH
+      - name: Extract Strawberry Perl path to STRAWBERRY_PERL_PATH
         shell: pwsh
         run: |
           $perlPaths = &where.exe perl
@@ -46,6 +46,20 @@ jobs:
             echo "STRAWBERRY_PERL_PATH=$perlDir" >> $env:GITHUB_ENV
           } else {
             echo "Strawberry Perl not found"
+          }
+      - name: Extract Strawberry cpanm path to STRAWBERRY_CPANM_PATH
+        shell: pwsh
+        run: |
+          $cpanmPaths = &where.exe cpanm
+          echo "All cpanm paths found:"
+          echo $cpanmPaths
+          $cpanmPath = $cpanmPaths | Select-String -Pattern "C:\\hostedtoolcache\\windows\\strawberry-perl"
+          if ($cpanmPath) {
+              $cpanmDir = [System.IO.Path]::GetDirectoryName(($cpanmPath | Select-Object -First 1).Line)
+              echo "cpanm found at $cpanmDir"
+              echo "STRAWBERRY_CPANM_PATH=$cpanmDir" >> $env:GITHUB_ENV
+          } else {
+              echo "cpanm not found"
           }
       - name: Set up MSYS2
         uses: msys2/setup-msys2@v2
