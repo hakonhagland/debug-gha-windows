@@ -36,7 +36,8 @@ jobs:
       - name: Build gsl
         run: |
           cd gsl-2.8
-          ./configure --prefix=/c/msys64/opt/gsl --enable-shared --disable-static --with-pic
+          sh.exe configure --prefix=/c/msys64/opt/gsl --enable-shared --disable-static --with-pic
+          make --version
           make
           make install
       - name: Verify gsl
