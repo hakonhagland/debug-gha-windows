@@ -51,15 +51,13 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           update: true
-          install: base-devel mingw-w64-x86_64-toolchain m4
+          install: base-devel mingw-w64-x86_64-toolchain
       - name: Update MSYS2 and install m4 package
+        # Note: adding m4 to the install list in the setup-msys2 action did not work
+        #  so we have to install it manually
         run: |
           C:\msys64\usr\bin\pacman -Syu --noconfirm
           C:\msys64\usr\bin\pacman -S --noconfirm m4
-        shell: cmd
-      - name: List usr/bin directory
-        run: |
-          dir C:\msys64\usr\bin
         shell: cmd
       - name: Check for m4.exe in usr/bin
         run: |
@@ -73,7 +71,6 @@ jobs:
       - name: Add MSYS2 to Path
         run: |
           echo "C:\msys64\usr\bin" >> $env:GITHUB_PATH
-          ls C:\msys64\usr\bin
       - name: Install Alien::MSYS
         run: |
           $env:PATH = "$env:STRAWBERRY_PERL_PATH;$env:PATH"
