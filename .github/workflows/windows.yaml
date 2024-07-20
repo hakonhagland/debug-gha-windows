@@ -42,6 +42,6 @@ jobs:
           make install
       - name: Verify gsl
         run: |
-           ls /c/msys64/opt/gsl/lib
-           ls /c/msys64/opt/gsl/include
-           ls /c/msys64/opt/gsl/bin
+           ls C:\msys64\opt\gsl\lib
+           ls C:\msys64\opt\gsl\include
+           ls C:\msys64\opt\gsl\bin
