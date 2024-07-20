@@ -52,6 +52,24 @@ jobs:
         with:
           update: true
           install: base-devel mingw-w64-x86_64-toolchain m4
+      - name: Update MSYS2 and install m4 package
+        run: |
+          C:\msys64\usr\bin\pacman -Syu --noconfirm
+          C:\msys64\usr\bin\pacman -S --noconfirm m4
+        shell: cmd
+      - name: List usr/bin directory
+        run: |
+          dir C:\msys64\usr\bin
+        shell: cmd
+      - name: Check for m4.exe in usr/bin
+        run: |
+          if exist C:\msys64\usr\bin\m4.exe (
+            echo m4.exe found in C:\msys64\usr\bin
+          ) else (
+            echo m4.exe not found in C:\msys64\usr\bin
+            exit 1
+          )
+        shell: cmd
       - name: Add MSYS2 to Path
         run: |
           echo "C:\msys64\usr\bin" >> $env:GITHUB_PATH
